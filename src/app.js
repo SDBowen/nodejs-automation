@@ -1,6 +1,6 @@
-const checkScreenResolution = require('./checkScreenResolution');
-
 const robot = require('robotjs');
+const { spawn } = require('child_process');
+const checkScreenResolution = require('./checkScreenResolution');
 
 // Input from user
 let site = '370';
@@ -11,7 +11,19 @@ let freightPercent = '2.5';
 let overheadPercent = '80';
 let changeStatusTo = 'AC1';
 
-checkScreenResolution();
+//checkScreenResolution();
+const pythonProcess = spawn('python', ['./appIsOpenCheck.py']);
+
+
+pythonProcess.stdout.on('data', data => {
+  console.log(data.toString());
+  if (data === 'success') {
+    console.log('QAD is open and focused...');
+  } else {
+    console.log('There is a problem opening QAD...');
+  }
+});
+
 //
 // # Determin if QAD application is open and add focus
 // appIsOpenCheck()
