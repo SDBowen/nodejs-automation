@@ -35,5 +35,4 @@ while True:
         window.set_foreground()
         break
 
-print('success')
-sys.stdout.flush()
+print('appIsOpenCheck.py: Success')
